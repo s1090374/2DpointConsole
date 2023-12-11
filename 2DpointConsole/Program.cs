@@ -1,4 +1,6 @@
-﻿namespace _2DpointConsole
+using System.Formats.Asn1;
+
+namespace _2DpointConsole
 {
     internal class Program
     {
@@ -12,14 +14,17 @@
             Console.WriteLine(p2.DistanceTo(p1));
             Console.WriteLine(Point2D.DistanceBetween(p1, p4));
             Console.WriteLine($"X:{p1.X},Y:{p1.Y}");
+
             if (Point2D.isTriangle(p1, p2, p3))
             {
-                Console.WriteLine("It is a triangle");
+                Console.WriteLine("It is a triangle.");
+                Console.WriteLine($"P1, P2, P3's Ares is:{Point2D.getArea(p1, p2, p3)}");
             }
             else
             {
                 Console.WriteLine("It is not a triangle");
             }
+           
         }
     }
 
@@ -81,6 +86,16 @@
             {
                 return false;
             }
+        }
+
+        public static double getArea(Point2D p1, Point2D p2, Point2D p3)
+        {
+            double a = p1.DistanceTo(p2);
+            double b = p1.DistanceTo(p3);
+            double c = p2.DistanceTo(p3);
+            double s = (a+b+c)/2;
+            double area = Math.Sqrt(s*(s-a)*(s-b)*(s-c));
+            return area;
         }
 
         public static double DistanceBetween(Point2D p1, Point2D p2)
